@@ -31,7 +31,7 @@ export function Terminal({ title, lines, copyText }: { title: string; lines: Ter
           {copied ? <Check className="h-3.5 w-3.5 text-primary" /> : <Copy className="h-3.5 w-3.5" />}
         </button>
       </div>
-      <div className="overflow-x-auto p-4 font-mono text-[13px] leading-6">
+      <div className="min-h-[152px] overflow-x-auto p-4 font-mono text-[13px] leading-6">
         {lines.map((line, i) => (
           <div key={i} className="whitespace-pre">
             {line.type === 'cmd' && <span className="mr-2 select-none text-primary">$</span>}
