@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose a focused improvement to the pg-kinetic website.
+title: "feature: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe the user problem first. Include accessibility, responsive, and
+        performance implications when they apply.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Who is affected, and what is unclear, slow, inaccessible, or missing today?
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed experience
+      description: Describe the expected content, interaction, and success criteria.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Describe other content, navigation, design, or implementation approaches you considered.
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Responsive, accessibility, and performance considerations
+      description: Note mobile, keyboard, reduced-motion, SEO, analytics, or loading constraints.
+  - type: checkboxes
+    id: contribution
+    attributes:
+      label: Contribution
+      options:
+        - label: I am willing to help implement or test this proposal.
+          required: false

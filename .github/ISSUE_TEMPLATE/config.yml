@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: pg-kinetic documentation
+    url: https://docs.pgkinetic.dev
+    about: Find proxy installation, configuration, and operational guidance.
+  - name: Core proxy repository
+    url: https://github.com/HookWoods/pg-kinetic
+    about: Report proxy, container, Helm, or documentation issues in the core project.
+  - name: Security vulnerability reporting
+    url: https://github.com/HookWoods/pg-kinetic-web/security/advisories/new
+    about: Report website vulnerabilities privately. Do not open a public issue.

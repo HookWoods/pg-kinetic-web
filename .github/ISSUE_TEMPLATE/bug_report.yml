@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a reproducible problem on the pg-kinetic website.
+title: "bug: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you for reporting a bug. Do not include API keys, Cloudflare
+        secrets, analytics credentials, or private data. Report security
+        vulnerabilities privately as described in SECURITY.md.
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: Describe the observed behavior and user impact.
+      placeholder: The mobile navigation cannot be opened with the keyboard.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Minimal reproduction
+      description: List the smallest steps needed to reproduce the problem.
+      placeholder: |
+        1. Open the affected URL.
+        2. Use this browser and viewport.
+        3. Observe this result.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: Explain what should happen instead.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Affected URL
+      placeholder: https://pgkinetic.dev/
+    validations:
+      required: true
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: Include browser and version, operating system, device, and viewport dimensions.
+    validations:
+      required: true
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Screenshot or safe diagnostics
+      description: Add a screenshot, sanitized console output, or network details if available.
+      render: text
