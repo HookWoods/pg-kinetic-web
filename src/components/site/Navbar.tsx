@@ -6,10 +6,10 @@ import { Logo } from './Logo'
 import { GITHUB_URL, DOCS_URL } from '@/config'
 
 const NAV_LINKS = [
-  { label: '/features', href: '#features' },
-  { label: '/architecture', href: '#architecture' },
-  { label: '/under-load', href: '#pressure' },
-  { label: '/docs', href: '#docs' },
+  { label: 'Why pg-kinetic', href: '#features' },
+  { label: 'Architecture', href: '#architecture' },
+  { label: 'Under load', href: '#pressure' },
+  { label: 'Documentation', href: '#docs' },
 ]
 
 export function Navbar() {
@@ -122,7 +122,7 @@ export function Navbar() {
               className="sheen h-9 rounded-full px-4 font-mono text-[12px] font-semibold transition-transform duration-200 active:scale-95"
             >
               <a href={DOCS_URL} target="_blank" rel="noreferrer">
-                ~/docs
+                Docs
               </a>
             </Button>
           </div>
@@ -158,7 +158,7 @@ export function Navbar() {
                 </Button>
                 <Button asChild className="mt-2 justify-start gap-2 font-mono text-[13px] font-semibold">
                   <a href={DOCS_URL} target="_blank" rel="noreferrer">
-                    ~/docs
+                    Documentation
                   </a>
                 </Button>
               </div>

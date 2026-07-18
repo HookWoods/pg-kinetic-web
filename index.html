@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="preload" href="./fonts/geist-latin.woff2" as="font" type="font/woff2" crossorigin />
-    <meta name="description" content="pg-kinetic is a Rust PostgreSQL proxy for transaction pooling, read routing, route-aware backpressure, policy, sharding, observability, and performance testing." />
+    <meta name="description" content="Keep PostgreSQL responsive under connection spikes with a Rust wire proxy for transaction pooling, route-level backpressure, read routing, and operator-visible health." />
     <meta name="application-name" content="pg-kinetic" />
     <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
     <meta name="theme-color" content="#05070c" />
@@ -12,16 +12,18 @@
     <meta property="og:site_name" content="pg-kinetic" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:url" content="https://pgkinetic.dev/" />
-    <meta property="og:title" content="PostgreSQL Proxy and Traffic Control | pg-kinetic" />
-    <meta property="og:description" content="A Rust PostgreSQL proxy for transaction pooling, read routing, route-aware backpressure, policy, sharding, and observability." />
-    <meta property="og:image" content="https://pgkinetic.dev/og-image.png" />
+    <meta property="og:title" content="PostgreSQL Proxy for Connection Control | pg-kinetic" />
+    <meta property="og:description" content="A drop-in Rust PostgreSQL wire proxy for transaction pooling, route-level backpressure, read routing, and operator-visible health." />
+    <meta property="og:image" content="https://pgkinetic.dev/pg-kinetic-card-v1.png" />
+    <meta property="og:image:secure_url" content="https://pgkinetic.dev/pg-kinetic-card-v1.png" />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="pg-kinetic PostgreSQL proxy and traffic control" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="PostgreSQL Proxy and Traffic Control | pg-kinetic" />
-    <meta name="twitter:description" content="A Rust PostgreSQL proxy for transaction pooling, read routing, route-aware backpressure, policy, sharding, and observability." />
-    <meta name="twitter:image" content="https://pgkinetic.dev/og-image.png" />
+    <meta name="twitter:title" content="PostgreSQL Proxy for Connection Control | pg-kinetic" />
+    <meta name="twitter:description" content="A drop-in Rust PostgreSQL wire proxy for transaction pooling, route-level backpressure, read routing, and operator-visible health." />
+    <meta name="twitter:image" content="https://pgkinetic.dev/pg-kinetic-card-v1.png" />
     <meta name="twitter:image:alt" content="pg-kinetic PostgreSQL proxy and traffic control" />
     <link rel="canonical" href="https://pgkinetic.dev/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -36,7 +38,7 @@
             "name": "pg-kinetic",
             "url": "https://pgkinetic.dev/",
             "logo": "https://pgkinetic.dev/pg-kinetic-mark.svg",
-            "description": "Open-source Rust PostgreSQL proxy for transaction pooling, routing, policy, and observability.",
+            "description": "Open-source Rust PostgreSQL wire proxy that keeps PostgreSQL responsive during connection spikes with transaction pooling, route-level backpressure, routing, and observability.",
             "sameAs": ["https://github.com/HookWoods/pg-kinetic"]
           },
           {
@@ -52,7 +54,7 @@
             "operatingSystem": "Cross-platform",
             "url": "https://pgkinetic.dev/",
             "downloadUrl": "https://github.com/HookWoods/pg-kinetic",
-            "description": "Rust PostgreSQL wire proxy for transaction pooling, read routing, route-aware backpressure, policy, sharding, and observability.",
+            "description": "Drop-in Rust PostgreSQL wire proxy for transaction pooling, route-level backpressure, read routing, and operator-visible health.",
             "featureList": [
               "Transaction pooling with wire-level session tracking",
               "Read routing with replica safety checks",
@@ -62,8 +64,8 @@
           },
           {
             "@type": "WebPage",
-            "name": "PostgreSQL Proxy and Traffic Control | pg-kinetic",
-            "description": "pg-kinetic is a Rust PostgreSQL proxy for transaction pooling, read routing, route-aware backpressure, policy, sharding, observability, and performance testing.",
+            "name": "PostgreSQL Proxy for Connection Control | pg-kinetic",
+            "description": "pg-kinetic keeps PostgreSQL responsive under connection spikes with transaction pooling, route-level backpressure, read routing, and operator-visible health.",
             "url": "https://pgkinetic.dev/",
             "inLanguage": "en-US",
             "isPartOf": { "@type": "WebSite", "name": "pg-kinetic", "url": "https://pgkinetic.dev/" },
@@ -76,7 +78,7 @@
               {
                 "@type": "Question",
                 "name": "What is pg-kinetic?",
-                "acceptedAnswer": { "@type": "Answer", "text": "pg-kinetic is an open-source Rust PostgreSQL wire proxy for transaction pooling, routing, sharding, policy, observability, and regression testing." }
+                "acceptedAnswer": { "@type": "Answer", "text": "pg-kinetic is an open-source, drop-in Rust PostgreSQL wire proxy that keeps PostgreSQL responsive during connection spikes with transaction pooling, route-level backpressure, routing, and operator-visible health." }
               },
               {
                 "@type": "Question",
@@ -98,14 +100,14 @@
         ]
       }
     </script>
-    <title>PostgreSQL Proxy and Traffic Control | pg-kinetic</title>
+    <title>PostgreSQL Proxy for Connection Control | pg-kinetic</title>
   </head>
   <body>
     <div id="root"></div>
     <noscript>
       <main>
-        <h1>pg-kinetic is a Rust PostgreSQL proxy</h1>
-        <p>pg-kinetic provides transaction pooling, read routing, route-aware backpressure, policy, sharding, observability, and performance regression testing for PostgreSQL applications.</p>
+        <p>Keep PostgreSQL responsive under connection spikes.</p>
+        <p>pg-kinetic is a drop-in Rust PostgreSQL wire proxy for transaction pooling, route-level backpressure, read routing, and operator-visible health.</p>
         <p><a href="https://docs.pgkinetic.dev/">Read the pg-kinetic operator documentation</a>.</p>
         <p><a href="https://github.com/HookWoods/pg-kinetic">View the pg-kinetic source code on GitHub</a>.</p>
       </main>

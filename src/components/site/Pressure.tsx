@@ -23,7 +23,11 @@ const PILLARS = [
 
 function QueueSlots({ filled, tone = 'bg-pg' }: { filled: number; tone?: string }) {
   return (
-    <div className="flex gap-1" aria-label={`Queue capacity: ${filled} of 10 slots used`}>
+    <div
+      className="flex gap-1"
+      role="img"
+      aria-label={`Queue capacity: ${filled} of 10 slots used`}
+    >
       {Array.from({ length: 10 }, (_, index) => (
         <span
           key={index}

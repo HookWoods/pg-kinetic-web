@@ -12,7 +12,7 @@ export function Footer() {
               <Logo size={24} />
               <span className="font-mono text-sm font-semibold">pg-kinetic</span>
             </div>
-            <p className="mt-3 font-mono text-[12px] leading-relaxed text-muted-foreground">
+            <p className="mt-3 font-mono text-[12px] leading-relaxed text-zinc-300">
               Rust PostgreSQL proxy for pooling, routing, sharding, policy,
               observability, and performance regression testing.
             </p>
@@ -20,31 +20,31 @@ export function Footer() {
 
           <div className="grid grid-cols-2 gap-12 sm:grid-cols-3">
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">project</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">project</p>
               <ul className="mt-4 space-y-2.5 text-sm">
                 <li>
-                  <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-foreground">
+                  <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-zinc-300 transition-colors hover:text-foreground">
                     <Github className="h-3.5 w-3.5" /> GitHub
                   </a>
                 </li>
                 <li>
-                  <a href={ISSUES_URL} target="_blank" rel="noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
+                  <a href={ISSUES_URL} target="_blank" rel="noreferrer" className="text-zinc-300 transition-colors hover:text-foreground">
                     Issues
                   </a>
                 </li>
                 <li>
-                  <a href="#pressure" className="text-muted-foreground transition-colors hover:text-foreground">
+                  <a href="#pressure" className="text-zinc-300 transition-colors hover:text-foreground">
                     Under pressure
                   </a>
                 </li>
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">docs</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">docs</p>
               <ul className="mt-4 space-y-2.5 text-sm">
                 {DOC_CARDS.slice(1, 5).map((doc) => (
                   <li key={doc.title}>
-                    <a href={doc.href} target="_blank" rel="noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
+                    <a href={doc.href} target="_blank" rel="noreferrer" className="text-zinc-300 transition-colors hover:text-foreground">
                       {doc.title}
                     </a>
                   </li>
@@ -52,20 +52,20 @@ export function Footer() {
               </ul>
             </div>
             <div>
-              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">site</p>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">site</p>
               <ul className="mt-4 space-y-2.5 text-sm">
-                <li><a href="#features" className="text-muted-foreground transition-colors hover:text-foreground">Features</a></li>
-                <li><a href="#architecture" className="text-muted-foreground transition-colors hover:text-foreground">Architecture</a></li>
-                <li><a href="#pressure" className="text-muted-foreground transition-colors hover:text-foreground">Under load</a></li>
-                <li><a href="#docs" className="text-muted-foreground transition-colors hover:text-foreground">Docs</a></li>
-                <li><a href="#faq" className="text-muted-foreground transition-colors hover:text-foreground">FAQ</a></li>
+                <li><a href="#features" className="text-zinc-300 transition-colors hover:text-foreground">Features</a></li>
+                <li><a href="#architecture" className="text-zinc-300 transition-colors hover:text-foreground">Architecture</a></li>
+                <li><a href="#pressure" className="text-zinc-300 transition-colors hover:text-foreground">Under load</a></li>
+                <li><a href="#docs" className="text-zinc-300 transition-colors hover:text-foreground">Docs</a></li>
+                <li><a href="#faq" className="text-zinc-300 transition-colors hover:text-foreground">FAQ</a></li>
               </ul>
             </div>
           </div>
         </div>
 
         <div className="mt-12 border-t border-white/5 pt-6">
-          <p className="font-mono text-[11px] text-zinc-600">pg-kinetic / rust / PostgreSQL wire protocol</p>
+          <p className="font-mono text-[11px] text-zinc-400">pg-kinetic / rust / PostgreSQL wire protocol</p>
         </div>
       </div>
     </footer>

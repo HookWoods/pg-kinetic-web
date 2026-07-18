@@ -6,7 +6,7 @@ import { SectionHeading } from './SectionHeading'
 const FAQS = [
   {
     question: 'What is pg-kinetic?',
-    answer: 'pg-kinetic is an open-source Rust PostgreSQL wire proxy for transaction pooling, routing, sharding, policy, observability, and regression testing.',
+    answer: 'pg-kinetic is an open-source, drop-in Rust PostgreSQL wire proxy. It keeps PostgreSQL responsive during connection spikes with transaction pooling, route-level backpressure, routing, and operator-visible health.',
   },
   {
     question: 'How does pg-kinetic handle overload?',
