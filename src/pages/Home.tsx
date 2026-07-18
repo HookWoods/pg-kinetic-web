@@ -7,6 +7,7 @@ import { Pressure } from '@/components/site/Pressure'
 import { Docs } from '@/components/site/Docs'
 import { Faq } from '@/components/site/Faq'
 import { Footer } from '@/components/site/Footer'
+import { AnalyticsConsentBanner } from '@/components/site/AnalyticsConsent'
 
 export default function Home() {
   return (
@@ -24,6 +25,7 @@ export default function Home() {
         </main>
         <Footer />
       </div>
+      <AnalyticsConsentBanner />
     </div>
   )
 }

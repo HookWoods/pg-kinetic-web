@@ -7,6 +7,9 @@
 - [Website](https://pgkinetic.dev/)
 - [Operator documentation](https://docs.pgkinetic.dev/)
 - [Source code and issues](https://github.com/HookWoods/pg-kinetic)
+- [PgBouncer alternative guide](https://pgkinetic.dev/pgbouncer-alternative/)
+- [PostgreSQL connection pooling guide](https://pgkinetic.dev/postgresql-connection-pooling/)
+- [PostgreSQL backpressure guide](https://pgkinetic.dev/postgresql-backpressure/)
 
 ## What it does
 

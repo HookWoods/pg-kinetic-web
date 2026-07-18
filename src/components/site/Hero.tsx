@@ -4,22 +4,24 @@ import { Terminal, type TermLine } from './Terminal'
 import { GITHUB_URL, DOCS_URL } from '@/config'
 
 const QUICKSTART_COMMAND = [
-  'git clone https://github.com/HookWoods/pg-kinetic.git',
-  'cd pg-kinetic',
-  'docker compose -f deploy/docker-compose.yml up -d --build',
+  'docker run --rm --name pg-kinetic \\',
+  '  --publish 6432:6432 \\',
+  '  --env PG_KINETIC_LISTEN_ADDR=0.0.0.0:6432 \\',
+  '  --env PG_KINETIC_BACKEND_ADDR=<POSTGRES_IP>:5432 \\',
+  '  ghcr.io/hookwoods/pg-kinetic:latest',
 ].join('\n')
 
 const QUICKSTART_LINES: TermLine[] = [
-  { type: 'cmd', text: 'git clone https://github.com/HookWoods/pg-kinetic.git' },
-  { type: 'cmd', text: 'cd pg-kinetic' },
-  { type: 'cmd', text: 'docker compose -f deploy/docker-compose.yml up -d --build' },
-  { type: 'out', text: 'pg-kinetic ready on localhost:6432' },
+  { type: 'cmd', text: 'docker run --rm --name pg-kinetic \\' },
+  { type: 'continuation', text: '  --publish 6432:6432 \\' },
+  { type: 'continuation', text: '  --env PG_KINETIC_LISTEN_ADDR=0.0.0.0:6432 \\' },
+  { type: 'continuation', text: '  --env PG_KINETIC_BACKEND_ADDR=<POSTGRES_IP>:5432 \\' },
+  { type: 'continuation', text: '  ghcr.io/hookwoods/pg-kinetic:latest' },
 ]
 
 const ENDPOINTS = [
   { label: 'PostgreSQL', value: ':6432' },
-  { label: 'Admin', value: ':7000' },
-  { label: 'Metrics', value: ':9090' },
+  { label: 'Backend', value: '<POSTGRES_IP>:5432' },
 ]
 
 export function Hero() {
@@ -89,8 +91,8 @@ export function Hero() {
 
           <div className="word-in" style={{ '--d': '180ms' } as React.CSSProperties}>
             <p className="mb-3 font-mono text-[11px] uppercase tracking-[0.14em] text-pg-bright">Quick start</p>
-            <Terminal title="local Docker Compose" lines={QUICKSTART_LINES} copyText={QUICKSTART_COMMAND} />
-            <div className="mt-4 grid grid-cols-3 divide-x divide-white/10 border-y border-white/10 py-4">
+            <Terminal title="Docker image · latest" lines={QUICKSTART_LINES} copyText={QUICKSTART_COMMAND} />
+            <div className="mt-4 grid grid-cols-2 divide-x divide-white/10 border-y border-white/10 py-4">
               {ENDPOINTS.map((endpoint) => (
                 <div key={endpoint.label} className="px-3 first:pl-0 last:pr-0">
                   <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500">{endpoint.label}</p>
@@ -99,7 +101,7 @@ export function Hero() {
               ))}
             </div>
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-zinc-400">
-              The bundled Compose setup builds the local image, starts PostgreSQL, and exposes health checks and Prometheus metrics.
+              Replace <code className="font-mono text-zinc-300">&lt;POSTGRES_IP&gt;</code> with a reachable PostgreSQL address. The image pulls the latest published release; no repository checkout is required.
             </p>
           </div>
         </div>

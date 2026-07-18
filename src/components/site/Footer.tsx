@@ -1,6 +1,7 @@
 import { Github } from 'lucide-react'
 import { Logo } from './Logo'
 import { GITHUB_URL, ISSUES_URL, DOC_CARDS } from '@/config'
+import { isAnalyticsConfigured, reopenAnalyticsConsent } from '@/lib/analytics'
 
 export function Footer() {
   return (
@@ -18,7 +19,7 @@ export function Footer() {
             </p>
           </div>
 
-          <div className="grid grid-cols-2 gap-12 sm:grid-cols-3">
+          <div className="grid grid-cols-2 gap-12 sm:grid-cols-4">
             <div>
               <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">project</p>
               <ul className="mt-4 space-y-2.5 text-sm">
@@ -61,11 +62,26 @@ export function Footer() {
                 <li><a href="#faq" className="text-zinc-300 transition-colors hover:text-foreground">FAQ</a></li>
               </ul>
             </div>
+            <div>
+              <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-400">guides</p>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                <li><a href="/pgbouncer-alternative/" className="text-zinc-300 transition-colors hover:text-foreground">PgBouncer alternative</a></li>
+                <li><a href="/postgresql-connection-pooling/" className="text-zinc-300 transition-colors hover:text-foreground">Connection pooling</a></li>
+                <li><a href="/postgresql-backpressure/" className="text-zinc-300 transition-colors hover:text-foreground">PostgreSQL backpressure</a></li>
+              </ul>
+            </div>
           </div>
         </div>
 
         <div className="mt-12 border-t border-white/5 pt-6">
-          <p className="font-mono text-[11px] text-zinc-400">pg-kinetic / rust / PostgreSQL wire protocol</p>
+          <div className="flex flex-wrap items-center justify-between gap-3 font-mono text-[11px] text-zinc-400">
+            <p>pg-kinetic / rust / PostgreSQL wire protocol</p>
+            {isAnalyticsConfigured() && (
+              <button type="button" onClick={reopenAnalyticsConsent} className="transition-colors hover:text-foreground">
+                Analytics preferences
+              </button>
+            )}
+          </div>
         </div>
       </div>
     </footer>

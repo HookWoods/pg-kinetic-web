@@ -13,15 +13,15 @@ observability.
 - React 19 and TypeScript
 - Vite 8
 - Tailwind CSS and Radix UI primitives
-- GitHub Pages for static hosting
+- Cloudflare Pages for static hosting
 
 ## Requirements
 
 - Node.js `20.19.0+` or `22.12.0+`
 - npm 10+
 
-The GitHub Pages workflow builds with Node.js 22. Use an active LTS release
-locally to keep the development and deployment environments aligned.
+Cloudflare Pages builds with Node.js 22. Use an active LTS release locally to
+keep the development and deployment environments aligned.
 
 ## Get started
 
@@ -55,11 +55,8 @@ src/
   config.ts         Website, documentation, and repository URLs
   index.css         Design tokens and global styles
 public/
-  CNAME             GitHub Pages custom-domain declaration
   favicon.svg       Browser icon
   site.webmanifest  Browser and installed-app metadata
-.github/workflows/
-  deploy.yml        GitHub Pages build and deployment workflow
 ```
 
 Keep external URLs in `src/config.ts`. Static files in `public/` are copied
@@ -73,19 +70,27 @@ The documentation site is maintained with Docusaurus in the core repository at
 
 ## Deployment
 
-GitHub Actions builds the site and deploys the `dist/` artifact to GitHub Pages
-through [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml). In the
-repository settings, set **Pages** to use **GitHub Actions** as its source and
-set the Pages environment to allow the release branch.
+Cloudflare Pages deploys the production branch directly from GitHub. Configure
+the Pages project with production branch `main`, build command `npm run build`,
+and build output directory `dist`.
 
-The workflow uses `npm ci`, then `npm run build`. A deployment can also be
-started manually from the Actions tab.
-
-`public/CNAME` declares `pgkinetic.dev` for GitHub Pages. Keep that file and
-the custom domain in the repository's Pages settings in sync.
+Manage `pgkinetic.dev` and its DNS record under the Cloudflare Pages project's
+**Custom domains** settings. GitHub Pages must not retain this custom domain.
 
 `docs.pgkinetic.dev` is managed by the Docusaurus deployment in the core
 project. Its custom-domain file lives at `docs-site/static/CNAME`.
+
+### Google Analytics
+
+The site supports Google Analytics 4 without committing its measurement ID.
+Create a Web data stream in GA4, then add the public environment variable
+`VITE_GA_MEASUREMENT_ID` with its `G-...` value in the Cloudflare Pages
+project's production environment. Redeploy after saving the variable.
+
+Analytics remains disabled until a visitor explicitly accepts it. The site does
+not send Google Analytics requests when the variable is absent or the visitor
+rejects analytics. Use `.env.example` for local configuration; do not commit a
+real local `.env` file.
 
 ## Dependency maintenance
 
@@ -98,7 +103,7 @@ npm audit
 ```
 
 Keep `package-lock.json` committed. It is the source of truth for reproducible
-CI and GitHub Pages builds.
+Cloudflare Pages builds.
 
 ## Contribution guidelines
 

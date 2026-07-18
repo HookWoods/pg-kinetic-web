@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Check, Copy } from 'lucide-react'
 
-export type TermLine = { type: 'cmd' | 'out' | 'comment'; text: string }
+export type TermLine = { type: 'cmd' | 'continuation' | 'out' | 'comment'; text: string }
 
 export function Terminal({ title, lines, copyText }: { title: string; lines: TermLine[]; copyText: string }) {
   const [copied, setCopied] = useState(false)
@@ -35,9 +35,10 @@ export function Terminal({ title, lines, copyText }: { title: string; lines: Ter
         {lines.map((line, i) => (
           <div key={i} className="whitespace-pre">
             {line.type === 'cmd' && <span className="mr-2 select-none text-primary">$</span>}
+            {line.type === 'continuation' && <span className="mr-2 select-none text-zinc-500">&gt;</span>}
             <span
               className={
-                line.type === 'cmd'
+                line.type === 'cmd' || line.type === 'continuation'
                   ? 'text-zinc-100'
                   : line.type === 'comment'
                     ? 'italic text-zinc-500'

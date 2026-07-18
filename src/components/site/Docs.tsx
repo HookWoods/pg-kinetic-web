@@ -9,7 +9,7 @@ export function Docs() {
     <section id="docs" className="relative scroll-mt-24 py-24 md:py-36">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeading index="docs" title="Read the manual, not the marketing">
-          Every subsystem ships with an operator guide in the repo.
+          Each subsystem has an operator guide with deployment and verification details.
         </SectionHeading>
 
         <Reveal delay={120}>

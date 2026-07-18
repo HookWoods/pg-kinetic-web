@@ -3,7 +3,8 @@ export const DOCS_URL = 'https://docs.pgkinetic.dev'
 export const GITHUB_URL = 'https://github.com/HookWoods/pg-kinetic'
 export const ISSUES_URL = `${GITHUB_URL}/issues`
 
-const doc = (slug: string) => `${DOCS_URL}/docs/${slug}`
+// Docusaurus publishes the documentation at the domain root, not under /docs.
+const doc = (slug: string) => `${DOCS_URL}/${slug}`
 
 export type DocCard = { title: string; path: string; blurb: string; href: string }
 
