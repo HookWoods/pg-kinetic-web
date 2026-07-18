@@ -1,4 +1,4 @@
-import { ShieldCheck, Gauge, Search } from 'lucide-react'
+import { ArrowRight, CheckCircle2, CircleAlert, Gauge, Search, ShieldCheck } from 'lucide-react'
 import { GlassCard } from './Glass'
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
@@ -7,115 +7,41 @@ const PILLARS = [
   {
     icon: ShieldCheck,
     title: 'Driver-safe',
-    body: 'Session state is tracked at the wire level. Backends re-enter the pool only when provably reusable — your driver never sees the difference.',
+    body: 'Session state is tracked at the wire level. Backends return to the pool only when they are reusable.',
   },
   {
     icon: Gauge,
     title: 'Predictable under load',
-    body: 'Per-route queues, caps, and timeouts. Saturated routes get a fast, explicit overload error instead of an indefinite hang.',
+    body: 'Each route has its own queue and deadline. A full route rejects work quickly instead of hanging.',
   },
   {
     icon: Search,
     title: 'Explainable by default',
-    body: 'Every decision is observable: SHOW ROUTES for the live picture, Prometheus metrics for the trends, structured errors for the rest.',
+    body: 'SHOW ROUTES, Prometheus metrics, and structured errors make every routing decision visible.',
   },
 ]
 
-type Lane = {
-  name: string
-  tone: 'ok' | 'read' | 'noisy'
-  fill: number // queue slots filled (0..10)
-  traffic: number[] // traffic bar heights
+function QueueSlots({ filled, tone = 'bg-pg' }: { filled: number; tone?: string }) {
+  return (
+    <div className="flex gap-1" aria-label={`Queue capacity: ${filled} of 10 slots used`}>
+      {Array.from({ length: 10 }, (_, index) => (
+        <span
+          key={index}
+          className={`h-3 flex-1 rounded-[2px] ${index < filled ? tone : 'bg-white/[0.08]'}`}
+        />
+      ))}
+    </div>
+  )
 }
 
-const LANES: Lane[] = [
-  { name: 'api-gw · write', tone: 'ok', fill: 2, traffic: [2, 3, 2, 4, 3, 5, 4, 3, 4, 5, 3, 4] },
-  { name: 'worker · read', tone: 'read', fill: 4, traffic: [3, 4, 5, 4, 6, 5, 7, 5, 6, 4, 5, 6] },
-  { name: 'billing · noisy', tone: 'noisy', fill: 10, traffic: [4, 6, 7, 8, 9, 8, 10, 9, 10, 10, 9, 10] },
-]
-
-const TONE = {
-  ok: { dot: '#5aa2ff', text: 'text-pg-bright', border: 'border-pg/40', chip: 'border-pg/30 bg-pg/10 text-pg-bright' },
-  read: { dot: '#1fd98a', text: 'text-pulse', border: 'border-pulse/40', chip: 'border-pulse/30 bg-pulse/10 text-pulse' },
-  noisy: { dot: '#f6a723', text: 'text-warn', border: 'border-warn/50', chip: 'border-warn/40 bg-warn/10 text-warn' },
-} as const
-
-const MAX_BARS = 10
-
-function LaneCard({ lane }: { lane: Lane }) {
-  const t = TONE[lane.tone]
-  const saturated = lane.fill >= 10
+function HealthyRoute({ name, detail }: { name: string; detail: string }) {
   return (
-    <div className={`rounded-lg border bg-white/[0.02] p-4 transition-colors duration-200 ${saturated ? 'border-warn/40' : 'border-white/[0.07] hover:border-white/15'}`}>
-      {/* lane header */}
-      <div className="flex items-center gap-2">
-        <span className="h-1.5 w-1.5 rounded-full" style={{ background: t.dot }} />
-        <span className="font-mono text-[12px] font-medium text-zinc-200">{lane.name}</span>
-        <span className={`ml-auto rounded border px-1.5 py-0.5 font-mono text-[9.5px] ${saturated ? 'border-warn/40 bg-warn/10 text-warn' : 'border-white/10 bg-white/[0.03] text-zinc-500'}`}>
-          {saturated ? 'queue full' : 'flowing'}
-        </span>
+    <div className="rounded-lg border border-white/[0.08] bg-white/[0.025] px-3 py-3">
+      <div className="flex items-center justify-between gap-3">
+        <span className="font-mono text-[11px] font-medium text-zinc-200">{name}</span>
+        <CheckCircle2 className="h-3.5 w-3.5 shrink-0 text-pulse" aria-hidden="true" />
       </div>
-
-      {/* traffic sparkline */}
-      <div className="mt-3 flex h-6 items-end gap-[3px]">
-        {lane.traffic.map((h, i) => (
-          <span
-            key={i}
-            className="w-full rounded-[2px] transition-all"
-            style={{
-              height: `${(h / MAX_BARS) * 100}%`,
-              background: t.dot,
-              opacity: 0.22 + (h / MAX_BARS) * 0.55,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* pipeline */}
-      <div className="mt-3 flex items-center gap-2">
-        {/* queue */}
-        <div className="shrink-0">
-          <div className="flex gap-[3px]">
-            {Array.from({ length: 10 }, (_, i) => (
-              <span
-                key={i}
-                className="h-3 w-1.5 rounded-[2px]"
-                style={{
-                  background: i < lane.fill ? t.dot : 'rgba(255,255,255,0.07)',
-                  boxShadow: i < lane.fill && saturated ? `0 0 6px ${t.dot}` : undefined,
-                }}
-              />
-            ))}
-          </div>
-          <p className="mt-1.5 font-mono text-[9px] text-zinc-600">queue {lane.fill}/10</p>
-        </div>
-
-        <span className="font-mono text-[11px] text-zinc-600">→</span>
-
-        {/* gate */}
-        <div className="shrink-0 text-center">
-          <div className={`flex h-7 w-9 items-center justify-center rounded-md border bg-pg/[0.08] ${saturated ? 'border-warn/60' : 'border-pg/50'}`}>
-            <span className={`h-3.5 w-[3px] rounded-full ${saturated ? 'bg-warn' : 'bg-pg-bright'}`} />
-          </div>
-          <p className="mt-1.5 font-mono text-[9px] text-zinc-600">gate</p>
-        </div>
-
-      </div>
-
-      {/* outcome — full-width strip, one glance */}
-      {saturated ? (
-        <div className="mt-3 flex items-center justify-between rounded-md border border-warn/40 bg-warn/[0.08] px-3 py-2">
-          <span className="whitespace-nowrap font-mono text-[10px] font-medium text-warn">53300 · fast reject</span>
-          <span className="whitespace-nowrap font-mono text-[9px] text-zinc-500">error in ms — no hang</span>
-        </div>
-      ) : (
-        <div className="mt-3 flex items-center justify-between rounded-md border border-white/[0.08] bg-white/[0.02] px-3 py-2">
-          <span className={`font-mono text-[10px] font-medium ${t.text}`}>
-            {lane.tone === 'read' ? 'admitted → replica' : 'admitted → primary'}
-          </span>
-          <span className="font-mono text-[9px] text-zinc-500">backends 3/3</span>
-        </div>
-      )}
+      <p className="mt-1 font-mono text-[9.5px] text-zinc-500">{detail}</p>
     </div>
   )
 }
@@ -125,24 +51,20 @@ export function Pressure() {
     <section id="pressure" className="relative scroll-mt-24 py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-6 lg:px-10">
         <SectionHeading index="under-load" title="Stay predictable under pressure." tone="text-pulse">
-          Traffic spikes should degrade gracefully, not mysteriously. pg-kinetic shapes
-          load per route — so one noisy path can never take the pool down with it.
+          Traffic spikes should degrade gracefully, not mysteriously. pg-kinetic isolates pressure per route so one noisy path cannot take the pool down with it.
         </SectionHeading>
 
         <div className="mt-10 grid items-stretch gap-3 lg:grid-cols-[0.9fr_1.1fr]">
           <Reveal delay={100}>
             <div className="flex h-full flex-col gap-3">
-              {PILLARS.map((p) => (
-                <GlassCard
-                  key={p.title}
-                  className="group flex flex-1 items-start gap-4 rounded-xl p-5"
-                >
+              {PILLARS.map((pillar) => (
+                <GlassCard key={pillar.title} className="group flex flex-1 items-start gap-4 rounded-xl p-5">
                   <div className="glass flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-pg-bright transition-transform duration-300 group-hover:scale-110">
-                    <p.icon className="h-4 w-4" />
+                    <pillar.icon className="h-4 w-4" />
                   </div>
                   <div>
-                    <h3 className="text-[15px] font-semibold tracking-tight">{p.title}</h3>
-                    <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{p.body}</p>
+                    <h3 className="text-[15px] font-semibold tracking-tight">{pillar.title}</h3>
+                    <p className="mt-1.5 text-[13px] leading-relaxed text-muted-foreground">{pillar.body}</p>
                   </div>
                 </GlassCard>
               ))}
@@ -150,27 +72,58 @@ export function Pressure() {
           </Reveal>
 
           <Reveal delay={180}>
-            <div className="glass-deep h-full overflow-hidden rounded-2xl">
-              <div className="flex items-center justify-between border-b border-white/5 px-4 py-2.5">
-                <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">
-                  backpressure — one queue per route
-                </span>
-                <span className="hidden items-center gap-3 font-mono text-[9.5px] text-zinc-600 sm:flex">
-                  <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-pg" /> write</span>
-                  <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-pulse" /> read</span>
-                  <span className="flex items-center gap-1.5"><span className="h-1.5 w-1.5 rounded-full bg-warn" /> saturated</span>
-                </span>
+            <div className="glass-deep h-full overflow-hidden rounded-xl">
+              <div className="border-b border-white/5 px-5 py-4">
+                <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-zinc-500">Backpressure in practice</p>
+                <h3 className="mt-1.5 text-lg font-semibold tracking-tight text-zinc-100">Billing reaches its queue limit</h3>
               </div>
 
-              <div className="grid gap-3 p-4 sm:grid-cols-3">
-                {LANES.map((lane) => (
-                  <LaneCard key={lane.name} lane={lane} />
-                ))}
+              <div className="p-5">
+                <div className="rounded-lg border border-warn/40 bg-warn/[0.06] p-4">
+                  <div className="flex flex-wrap items-start justify-between gap-3">
+                    <div>
+                      <p className="font-mono text-[11px] font-medium text-warn">billing / write</p>
+                      <p className="mt-1 font-mono text-[10px] text-zinc-500">Route-specific queue</p>
+                    </div>
+                    <span className="inline-flex items-center gap-1.5 rounded border border-warn/40 bg-warn/10 px-2 py-1 font-mono text-[10px] font-medium text-warn">
+                      <CircleAlert className="h-3 w-3" aria-hidden="true" /> queue full
+                    </span>
+                  </div>
+                  <div className="mt-4">
+                    <QueueSlots filled={10} tone="bg-warn" />
+                    <div className="mt-2 flex items-center justify-between font-mono text-[9.5px] text-zinc-500">
+                      <span>queued work</span>
+                      <span>10 / 10</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="my-4 grid gap-2 sm:grid-cols-[1fr_auto_1fr] sm:items-center">
+                  <div className="rounded-lg border border-white/[0.08] bg-white/[0.025] px-3 py-3">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-zinc-600">New request</p>
+                    <p className="mt-1 font-mono text-[11px] text-zinc-200">billing / write</p>
+                  </div>
+                  <ArrowRight className="mx-auto h-4 w-4 rotate-90 text-zinc-600 sm:rotate-0" aria-hidden="true" />
+                  <div className="rounded-lg border border-warn/40 bg-warn/[0.08] px-3 py-3">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.14em] text-warn/80">Immediate result</p>
+                    <p className="mt-1 font-mono text-[11px] font-medium text-warn">53300 overload error</p>
+                  </div>
+                </div>
+
+                <div className="border-t border-white/5 pt-4">
+                  <div className="flex items-center justify-between gap-3">
+                    <p className="font-mono text-[10px] uppercase tracking-[0.14em] text-zinc-500">Other routes continue normally</p>
+                    <span className="font-mono text-[9.5px] text-pulse">capacity stays isolated</span>
+                  </div>
+                  <div className="mt-3 grid gap-2 sm:grid-cols-2">
+                    <HealthyRoute name="api-gw / write" detail="2 / 10 queued" />
+                    <HealthyRoute name="worker / read" detail="4 / 10 queued" />
+                  </div>
+                </div>
               </div>
 
-              <p className="border-t border-white/5 px-5 py-3 font-mono text-[10.5px] leading-relaxed text-zinc-600">
-                billing saturates → its queue fills → 53300 overload error in
-                milliseconds · api-gw and worker never feel it
+              <p className="border-t border-white/5 px-5 py-3 font-mono text-[10.5px] leading-relaxed text-zinc-500">
+                A busy route gets a fast, explicit failure. It does not consume the capacity reserved for the rest of the system.
               </p>
             </div>
           </Reveal>

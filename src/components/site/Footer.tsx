@@ -42,10 +42,10 @@ export function Footer() {
             <div>
               <p className="font-mono text-[10px] uppercase tracking-widest text-zinc-600">docs</p>
               <ul className="mt-4 space-y-2.5 text-sm">
-                {DOC_CARDS.slice(1, 5).map((d) => (
-                  <li key={d.title}>
-                    <a href={d.href} target="_blank" rel="noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
-                      {d.title}
+                {DOC_CARDS.slice(1, 5).map((doc) => (
+                  <li key={doc.title}>
+                    <a href={doc.href} target="_blank" rel="noreferrer" className="text-muted-foreground transition-colors hover:text-foreground">
+                      {doc.title}
                     </a>
                   </li>
                 ))}
@@ -63,11 +63,8 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-wrap items-center justify-between gap-4 border-t border-white/5 pt-6">
-          <p className="font-mono text-[11px] text-zinc-600">pg-kinetic · rust · postgresql wire protocol</p>
-          <p className="font-mono text-[11px] text-zinc-600">
-            direct :55432 · pgbouncer :56432 · pgdog :57432 · pg-kinetic :58432
-          </p>
+        <div className="mt-12 border-t border-white/5 pt-6">
+          <p className="font-mono text-[11px] text-zinc-600">pg-kinetic / rust / PostgreSQL wire protocol</p>
         </div>
       </div>
     </footer>
