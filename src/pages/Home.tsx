@@ -5,6 +5,7 @@ import { Features } from '@/components/site/Features'
 import { Architecture } from '@/components/site/Architecture'
 import { Pressure } from '@/components/site/Pressure'
 import { Docs } from '@/components/site/Docs'
+import { Faq } from '@/components/site/Faq'
 import { Footer } from '@/components/site/Footer'
 
 export default function Home() {
@@ -19,6 +20,7 @@ export default function Home() {
           <Architecture />
           <Pressure />
           <Docs />
+          <Faq />
         </main>
         <Footer />
       </div>

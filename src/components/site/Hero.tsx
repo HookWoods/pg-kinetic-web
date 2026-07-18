@@ -168,7 +168,7 @@ function Tilt({ children }: { children: React.ReactNode }) {
 
 const SMOKE = ['tls_smoke', 'auth_smoke', 'reload_config', 'graceful_drain', 'health_endpoints', 'socket_options']
 
-const H1_WORDS = ['PostgreSQL', 'traffic', 'control', 'at']
+const H1_WORDS = ['PostgreSQL', 'proxy', 'traffic', 'control', 'at']
 
 export function Hero() {
   return (
@@ -206,11 +206,11 @@ export function Hero() {
             </h1>
 
             <p
-              className="word-in mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
+              className="summary word-in mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground"
               style={{ '--d': '480ms' } as React.CSSProperties}
             >
-              Rust PostgreSQL proxy for pooling, routing, sharding, policy,
-              observability, and performance regression testing.
+              Rust PostgreSQL proxy for transaction pooling, read routing,
+              route-aware backpressure, policy, sharding, and observability.
             </p>
 
             <div className="word-in mt-8 flex flex-wrap items-center gap-3" style={{ '--d': '580ms' } as React.CSSProperties}>

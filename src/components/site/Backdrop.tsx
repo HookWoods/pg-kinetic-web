@@ -20,6 +20,8 @@ export function Backdrop() {
     const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     let raf = 0
+    let lastFrame = 0
+    let running = false
     let width = 0
     let height = 0
     let dpr = 1
@@ -57,6 +59,12 @@ export function Backdrop() {
 
     let last = performance.now()
     const draw = (now: number) => {
+      if (!running) return
+      if (!reduced && now - lastFrame < 33) {
+        raf = requestAnimationFrame(draw)
+        return
+      }
+      lastFrame = now
       const dt = Math.min((now - last) / 1000, 0.05)
       last = now
       ctx.clearRect(0, 0, width, height)
@@ -116,18 +124,43 @@ export function Backdrop() {
       }
       ctx.globalCompositeOperation = 'source-over'
 
-      raf = requestAnimationFrame(draw)
+      if (!reduced) raf = requestAnimationFrame(draw)
     }
 
     seed()
     if (reduced) {
-      // static wires, no loop
+      running = true
       draw(performance.now())
-      cancelAnimationFrame(raf)
     } else {
-      raf = requestAnimationFrame(draw)
+      const updatePlayback = () => {
+        const shouldRun = document.visibilityState === 'visible'
+        if (shouldRun && !running) {
+          running = true
+          last = performance.now()
+          raf = requestAnimationFrame(draw)
+        } else if (!shouldRun && running) {
+          running = false
+          cancelAnimationFrame(raf)
+        }
+      }
+
+      updatePlayback()
+      document.addEventListener('visibilitychange', updatePlayback)
+
+      const onResize = () => seed()
+      window.addEventListener('resize', onResize)
+      return () => {
+        running = false
+        cancelAnimationFrame(raf)
+        document.removeEventListener('visibilitychange', updatePlayback)
+        window.removeEventListener('resize', onResize)
+      }
     }
-    const onResize = () => seed()
+
+    const onResize = () => {
+      seed()
+      draw(performance.now())
+    }
     window.addEventListener('resize', onResize)
     return () => {
       cancelAnimationFrame(raf)

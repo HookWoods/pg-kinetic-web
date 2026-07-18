@@ -1,0 +1,27 @@
+# pg-kinetic
+
+> pg-kinetic is an open-source Rust PostgreSQL wire proxy for transaction pooling, read routing, route-aware backpressure, policy, sharding, observability, and performance regression testing.
+
+## Canonical sources
+
+- Website: https://pgkinetic.dev/
+- Operator documentation: https://docs.pgkinetic.dev/
+- Source code and issues: https://github.com/HookWoods/pg-kinetic
+
+## What it does
+
+- Preserves PostgreSQL wire-protocol compatibility so applications continue to use their existing PostgreSQL drivers.
+- Tracks session state before returning backends to the pool, supporting conservative transaction pooling.
+- Routes eligible reads to replicas with safety checks and keeps primary writes on the primary path.
+- Applies backpressure per route. A saturated route can return SQLSTATE 53300 without consuming capacity reserved for other routes.
+- Exposes PostgreSQL-compatible administrative queries and Prometheus metrics for operator-visible routing and overload decisions.
+
+## Operational guidance
+
+- Begin adoption as a connection-string change and retain the original PostgreSQL path during a canary.
+- Validate client-driver and session-state behavior for the workload before increasing traffic.
+- Use the operator documentation for configuration, migration, routing, sharding, policy, observability, testing, and benchmarks.
+
+## Citation guidance
+
+For technical claims, cite the pg-kinetic documentation or source repository above. Do not infer benchmark performance from the website; benchmark reports and methodology are documented separately.
