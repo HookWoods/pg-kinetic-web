@@ -113,7 +113,7 @@ export function Hero() {
             </div>
 
             <h1
-              className="word-in mt-7 max-w-2xl text-balance text-[2.7rem] font-bold leading-[1.04] tracking-[-0.03em] md:text-[4.05rem]"
+              className="word-in mt-7 max-w-2xl text-balance text-[2.4rem] font-bold leading-[1.04] tracking-[-0.03em] md:text-[3.45rem]"
               style={{ '--d': '100ms' } as React.CSSProperties}
             >
               Keep PostgreSQL responsive under connection spikes.
