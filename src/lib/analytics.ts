@@ -6,7 +6,7 @@ const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim()
 
 declare global {
   interface Window {
-    dataLayer?: unknown[][]
+    dataLayer?: IArguments[]
     gtag?: (...args: unknown[]) => void
   }
 }
@@ -30,18 +30,19 @@ function loadGoogleAnalytics() {
   }
 
   window.dataLayer = window.dataLayer ?? []
-  window.gtag = (...args: unknown[]) => {
-    window.dataLayer?.push(args)
+  function gtag() {
+    // Google Tag reads queued calls from the native arguments object.
+    // eslint-disable-next-line prefer-rest-params
+    window.dataLayer?.push(arguments)
   }
+  window.gtag = gtag
+  window.gtag('js', new Date())
+  window.gtag('config', measurementId, { send_page_view: true })
 
   const script = document.createElement('script')
   script.async = true
   script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`
   script.dataset.pgKineticGa = 'true'
-  script.onload = () => {
-    window.gtag?.('js', new Date())
-    window.gtag?.('config', measurementId)
-  }
   document.head.appendChild(script)
 }
 
