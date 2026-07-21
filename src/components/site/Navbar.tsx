@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
-import { Github, Menu } from 'lucide-react'
+import { Menu } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
 import { Logo } from './Logo'
@@ -114,7 +115,7 @@ export function Navbar() {
               aria-label="pg-kinetic on GitHub"
               className="sheen flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-white/[0.04] text-zinc-300 transition-all duration-200 hover:border-white/25 hover:text-zinc-50 active:scale-95"
             >
-              <Github className="h-4 w-4" />
+              <FaGithub className="h-4 w-4" />
             </a>
             <Button
               size="sm"
@@ -153,7 +154,7 @@ export function Navbar() {
                 <div className="my-3 h-px bg-white/10" />
                 <Button variant="outline" asChild className="justify-start gap-2 font-mono text-[13px]">
                   <a href={GITHUB_URL} target="_blank" rel="noreferrer">
-                    <Github className="h-4 w-4" /> pg-kinetic
+                    <FaGithub className="h-4 w-4" /> pg-kinetic
                   </a>
                 </Button>
                 <Button asChild className="mt-2 justify-start gap-2 font-mono text-[13px] font-semibold">

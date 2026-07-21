@@ -1,4 +1,5 @@
-import { ArrowLeft, ArrowUpRight, BookOpen, Github } from 'lucide-react'
+import { ArrowLeft, ArrowUpRight, BookOpen } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import { DOCS_URL, GITHUB_URL } from '@/config'
 import { Logo } from '@/components/site/Logo'
 import { AnalyticsConsentBanner } from '@/components/site/AnalyticsConsent'
@@ -238,7 +239,7 @@ export function ContentPage({ page }: { page: ContentPageKey }) {
                 Read the docs
               </a>
               <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 border border-white/15 px-4 py-2 text-sm font-semibold text-zinc-100 transition-colors hover:border-white/35">
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-4 w-4" />
                 Review source
                 <ArrowUpRight className="h-3.5 w-3.5" />
               </a>

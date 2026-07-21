@@ -1,4 +1,5 @@
-import { ArrowUpRight, BookOpen, Github } from 'lucide-react'
+import { ArrowUpRight, BookOpen } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Reveal } from './Reveal'
 import { SectionHeading } from './SectionHeading'
@@ -30,7 +31,7 @@ export function Docs() {
               rel="noreferrer"
               className="glass sheen inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-medium text-zinc-200 transition-all duration-200 hover:-translate-y-0.5 hover:text-white active:scale-[0.98]"
             >
-              <Github className="h-4 w-4" />
+              <FaGithub className="h-4 w-4" />
               View GitHub
             </a>
           </div>

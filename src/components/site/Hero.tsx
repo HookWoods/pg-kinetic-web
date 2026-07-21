@@ -1,5 +1,6 @@
 import { useState } from 'react'
-import { ArrowRight, BookOpen, Box, Check, Container, Github, ShipWheel } from 'lucide-react'
+import { ArrowRight, BookOpen, Box, Check, Container, ShipWheel } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import { Button } from '@/components/ui/button'
 import { Terminal, type TermLine } from './Terminal'
 import { GITHUB_URL, DOCS_URL } from '@/config'
@@ -143,7 +144,7 @@ export function Hero() {
                 rel="noreferrer"
                 className="glass sheen inline-flex h-11 items-center gap-2 rounded-full px-6 text-sm font-medium text-zinc-200 transition-all duration-200 hover:-translate-y-0.5 hover:text-white active:scale-[0.98]"
               >
-                <Github className="h-4 w-4" />
+                <FaGithub className="h-4 w-4" />
                 View source
               </a>
             </div>
@@ -162,9 +163,9 @@ export function Hero() {
           </div>
 
           <div className="word-in lg:pt-1" style={{ '--d': '180ms' } as React.CSSProperties}>
-            <div className="mb-3 flex flex-wrap items-center justify-between gap-3">
+            <div className="mb-3 flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
               <p className="font-mono text-[11px] uppercase tracking-[0.14em] text-pg-bright">Quick start</p>
-              <div className="inline-flex border border-white/10 bg-black/20 p-1" role="tablist" aria-label="Installation method">
+              <div className="grid w-full grid-cols-3 border border-white/10 bg-black/20 p-1 sm:inline-flex sm:w-auto" role="tablist" aria-label="Installation method">
                 {INSTALL_METHODS.map((method) => {
                   const Icon = method.icon
                   const active = method.id === selectedInstallMethod.id
@@ -177,7 +178,7 @@ export function Hero() {
                       aria-selected={active}
                       aria-controls="quick-start-command"
                       onClick={() => setInstallMethod(method.id)}
-                      className={`flex h-8 items-center gap-1.5 px-2.5 font-mono text-[11px] transition-colors sm:px-3 ${
+                      className={`flex h-8 items-center justify-center gap-1.5 px-2 font-mono text-[11px] transition-colors sm:px-3 ${
                         active
                           ? 'bg-pg text-[#05101c]'
                           : 'text-zinc-400 hover:bg-white/5 hover:text-zinc-100'
@@ -197,7 +198,7 @@ export function Hero() {
               {selectedInstallMethod.endpoints.map((endpoint) => (
                 <div key={endpoint.label} className="px-3 first:pl-0 last:pr-0">
                   <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-500">{endpoint.label}</p>
-                  <p className="mt-1 font-mono text-sm font-medium text-zinc-200">{endpoint.value}</p>
+                  <p className="mt-1 break-words font-mono text-sm font-medium text-zinc-200">{endpoint.value}</p>
                 </div>
               ))}
             </div>
@@ -207,14 +208,14 @@ export function Hero() {
               <div className="mt-4 grid items-center gap-3 sm:grid-cols-[1fr_auto_1fr]">
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-zinc-600">Before</p>
-                  <code className="mt-1 block overflow-x-auto whitespace-nowrap font-mono text-[11px] text-zinc-400">
+                  <code className="mt-1 block break-all font-mono text-[11px] text-zinc-400 sm:overflow-x-auto sm:whitespace-nowrap sm:break-normal">
                     postgres://...@&lt;POSTGRES_IP&gt;:5432/...
                   </code>
                 </div>
                 <ArrowRight className="hidden h-4 w-4 text-pg sm:block" aria-hidden="true" />
                 <div>
                   <p className="font-mono text-[10px] uppercase tracking-[0.12em] text-pg-bright">After</p>
-                  <code className="mt-1 block overflow-x-auto whitespace-nowrap font-mono text-[11px] text-zinc-100">
+                  <code className="mt-1 block break-all font-mono text-[11px] text-zinc-100 sm:overflow-x-auto sm:whitespace-nowrap sm:break-normal">
                     postgres://...@{selectedInstallMethod.connectionTarget}/...
                   </code>
                 </div>

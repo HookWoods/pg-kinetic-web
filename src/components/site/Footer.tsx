@@ -1,4 +1,4 @@
-import { Github } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import { Logo } from './Logo'
 import { GITHUB_URL, ISSUES_URL, DOC_CARDS } from '@/config'
 import { isAnalyticsConfigured, reopenAnalyticsConsent } from '@/lib/analytics'
@@ -25,7 +25,7 @@ export function Footer() {
               <ul className="mt-4 space-y-2.5 text-sm">
                 <li>
                   <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-zinc-300 transition-colors hover:text-foreground">
-                    <Github className="h-3.5 w-3.5" /> GitHub
+                    <FaGithub className="h-3.5 w-3.5" /> GitHub
                   </a>
                 </li>
                 <li>
